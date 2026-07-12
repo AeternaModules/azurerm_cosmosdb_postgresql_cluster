@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "administrator_login_password" {
+  for_each     = { for k, v in var.cosmosdb_postgresql_clusters : k => v if v.administrator_login_password_key_vault_id != null && v.administrator_login_password_key_vault_secret_name != null }
+  name         = each.value.administrator_login_password_key_vault_secret_name
+  key_vault_id = each.value.administrator_login_password_key_vault_id
+}
 resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_postgresql_clusters" {
   for_each = var.cosmosdb_postgresql_clusters
 
@@ -20,7 +25,7 @@ resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_postgresql_clusters" {
   coordinator_server_edition           = each.value.coordinator_server_edition
   coordinator_public_ip_access_enabled = each.value.coordinator_public_ip_access_enabled
   citus_version                        = each.value.citus_version
-  administrator_login_password         = each.value.administrator_login_password
+  administrator_login_password         = each.value.administrator_login_password != null ? each.value.administrator_login_password : try(data.azurerm_key_vault_secret.administrator_login_password[each.key].value, null)
   node_public_ip_access_enabled        = each.value.node_public_ip_access_enabled
   tags                                 = each.value.tags
 
