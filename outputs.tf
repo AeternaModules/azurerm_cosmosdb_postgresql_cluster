@@ -1,3 +1,7 @@
+output "cosmosdb_postgresql_clusters_id" {
+  description = "Map of id values across all cosmosdb_postgresql_clusters, keyed the same as var.cosmosdb_postgresql_clusters"
+  value       = { for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_postgresql_clusters : k => v.id }
+}
 output "cosmosdb_postgresql_clusters_administrator_login_password" {
   description = "Map of administrator_login_password values across all cosmosdb_postgresql_clusters, keyed the same as var.cosmosdb_postgresql_clusters"
   value       = { for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_postgresql_clusters : k => v.administrator_login_password }
