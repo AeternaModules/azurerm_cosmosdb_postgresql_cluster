@@ -45,23 +45,23 @@ EOT
     point_in_time_in_utc                               = optional(string)
     node_vcores                                        = optional(number)
     node_storage_quota_in_mb                           = optional(number)
-    node_server_edition                                = optional(string) # Default: "MemoryOptimized"
-    ha_enabled                                         = optional(bool)   # Default: false
+    node_server_edition                                = optional(string)
+    ha_enabled                                         = optional(bool)
     sql_version                                        = optional(string)
     coordinator_vcore_count                            = optional(number)
     coordinator_storage_quota_in_mb                    = optional(number)
-    coordinator_server_edition                         = optional(string) # Default: "GeneralPurpose"
-    coordinator_public_ip_access_enabled               = optional(bool)   # Default: true
+    coordinator_server_edition                         = optional(string)
+    coordinator_public_ip_access_enabled               = optional(bool)
     citus_version                                      = optional(string)
     administrator_login_password                       = optional(string)
     administrator_login_password_key_vault_id          = optional(string)
     administrator_login_password_key_vault_secret_name = optional(string)
-    node_public_ip_access_enabled                      = optional(bool) # Default: false
+    node_public_ip_access_enabled                      = optional(bool)
     tags                                               = optional(map(string))
     maintenance_window = optional(object({
-      day_of_week  = optional(number) # Default: 0
-      start_hour   = optional(number) # Default: 0
-      start_minute = optional(number) # Default: 0
+      day_of_week  = optional(number)
+      start_hour   = optional(number)
+      start_minute = optional(number)
     }))
   }))
 }
