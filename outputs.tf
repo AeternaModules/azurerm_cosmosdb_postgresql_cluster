@@ -41,7 +41,7 @@ output "cosmosdb_postgresql_clusters_location" {
 }
 output "cosmosdb_postgresql_clusters_maintenance_window" {
   description = "Map of maintenance_window values across all cosmosdb_postgresql_clusters, keyed the same as var.cosmosdb_postgresql_clusters"
-  value       = { for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_postgresql_clusters : k => v.maintenance_window if v.maintenance_window != null && length(v.maintenance_window) > 0 }
+  value       = { for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_postgresql_clusters : k => one(v.maintenance_window) if v.maintenance_window != null && length(v.maintenance_window) > 0 }
 }
 output "cosmosdb_postgresql_clusters_name" {
   description = "Map of name values across all cosmosdb_postgresql_clusters, keyed the same as var.cosmosdb_postgresql_clusters"
